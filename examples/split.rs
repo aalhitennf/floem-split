@@ -21,12 +21,12 @@ fn main_view() -> impl IntoView {
             .into_any()
     }
 
-    let top = centered_textbox("top\ndefault size 35%\nmin height 50px\ndragger height 10px");
+    let top = centered_textbox("top\ndefault size 15%\nmin height 50px\ndragger height 20px");
 
     let nested_btm_left = centered_textbox("nested btm_left\ndefault size 35%\nmin width 25%");
     let nested_btm_right = centered_textbox("nested btm_right\nmin width 25%");
 
-    let btm_left = centered_textbox("btm_left\nmin width 100px");
+    let btm_left = centered_textbox("btm_left\ndefault size 45%\nmin width 100px");
 
     let nested_btm = h_split(nested_btm_left, nested_btm_right)
         .min_split(25.pct())
@@ -39,11 +39,12 @@ fn main_view() -> impl IntoView {
 
     let btm = h_split(btm_left, nested_btm)
         .min_split(100)
+        .default_split(45.pct())
         .dragging_style(|s| s.background(Color::PALE_GOLDENROD));
 
     let main_split = v_split(top, btm)
         .default_split(15.pct())
-        .min_split(50)
+        .min_split(50.px())
         .dynamic(false)
         // You can customize dragger of specific split
         .dragger_style(|s| {
